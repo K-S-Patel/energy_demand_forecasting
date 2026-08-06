@@ -97,5 +97,47 @@ After preprocessing and merging, the final dataset contains both energy consumpt
 | California_consumption_MW | Target variable (electricity demand) |
 
 ## Project Workflow
- ### Step 1
+ ### Step 1 Import Required Libraries
+ Pandas and NumPy were used for data preprocessing, Matplotlib for visualization, Scikit-learn for machine learning utilities, and XGBoost for gradient boosting    regression.
  
+ <img width="780" height="195" alt="Screenshot 2026-08-06 150058" src="https://github.com/user-attachments/assets/15b951d7-04de-4dd7-b248-0abfd22b4397" />
+
+---
+# Step 2 : Load Energy Dataset
+Historical hourly electricity consumption data was loaded from multiple Excel files. These files were combined into a single DataFrame to create a continuous dataset for preprocessing and analysis.
+
+<img width="664" height="203" alt="Screenshot 2026-08-06 153507" src="https://github.com/user-attachments/assets/357b812c-6d28-4493-acef-d59c8e521632" />
+
+ ---
+ ### Step 3 : Merging Data
+ Energy consumption data from 2019 to april 2026 merged into single excel file using pandas and saved in Energy_consumption_2019_April2026.xlsx
+
+ <img width="720" height="331" alt="Screenshot 2026-08-06 154029" src="https://github.com/user-attachments/assets/ea32ce44-618f-4c01-8242-c7bf30d24963" />
+
+---
+
+### Step 4 : Load and Inspect merged energy data and Weather data
+The hourly weather dataset and merged dataset was loaded into a Pandas DataFrame and inspected to verify its structure, data types, and completeness before merging it with the energy consumption datase
+<img width="725" height="329" alt="Screenshot 2026-08-06 160156" src="https://github.com/user-attachments/assets/07e2314e-febb-4942-90d7-e38290733885" />
+<img width="689" height="154" alt="Screenshot 2026-08-06 161034" src="https://github.com/user-attachments/assets/d5407d04-8be3-43f6-8c3a-06791b1e9f8f" />
+
+
+Weather Data 
+
+<img width="508" height="113" alt="Screenshot 2026-08-06 160841" src="https://github.com/user-attachments/assets/0f5b710e-b1bb-45c8-9cde-9503df349491" />
+<img width="553" height="159" alt="Screenshot 2026-08-06 160851" src="https://github.com/user-attachments/assets/2e46de02-20da-4694-a056-fd8256e655e8" />
+
+---
+### Step 5: Restore Date-Time Format and Merge 
+The original energy consumption dataset contained only the date, while the hourly time information was missing after processing. To ensure compatibility with the weather dataset, the complete date-time format (including hours) was restored. This enables accurate merging of both dataset.
+
+<img width="695" height="335" alt="Screenshot 2026-08-06 161824" src="https://github.com/user-attachments/assets/2f939437-9e81-4e67-8285-b2080cf5a5f4" />
+
+---
+
+### Step 6 : Data Cleaning
+Before training the machine learning models, the merged dataset was cleaned to improve data quality and retain only the features relevant to California Region for energy consumption forecasting. Unnecessary columns were removed, and selected column names were renamed to make the dataset more consistent, readable, and easier to work with during feature engineering and model development.
+ <img width="703" height="227" alt="Screenshot 2026-08-06 162517" src="https://github.com/user-attachments/assets/d27afb3e-af1a-4ab7-a53b-ad9b5620b4bf" />
+<img width="769" height="199" alt="Screenshot 2026-08-06 162706" src="https://github.com/user-attachments/assets/5dabad2f-494c-4eb0-8c16-1ed9c9e87949" />
+
+---
