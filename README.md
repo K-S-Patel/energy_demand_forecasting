@@ -141,3 +141,50 @@ Before training the machine learning models, the merged dataset was cleaned to i
 <img width="769" height="199" alt="Screenshot 2026-08-06 162706" src="https://github.com/user-attachments/assets/5dabad2f-494c-4eb0-8c16-1ed9c9e87949" />
 
 ---
+
+### Step 7 : Model Selection
+Based on the dataset structure two model **Random Forest Regresser** and **XGBoost** are selected.
+**REASON**
+Since electricity consumption depends on complex relationships between weather conditions, historical demand, and time-based patterns, ensemble learning models were chosen for their ability to capture nonlinear relationships and improve prediction accuracy.
+**Why Ensemble Learning?**
+
+Ensemble learning combines the predictions of multiple decision trees to produce a more accurate and stable model than a single decision tree. It helps reduce overfitting and improves overall prediction performance.
+
+This project uses two ensemble learning algorithms:
+
+* Random Forest Regressor
+* XGBoost Regressor
+
+---
+
+**Random Forest Regressor**
+
+Random Forest is based on the **Bagging (Bootstrap Aggregating)** technique, where multiple decision trees are trained on different subsets of the training data. The final prediction is obtained by averaging the predictions of all trees.
+
+**Why Random Forest?**
+
+* Handles nonlinear relationships effectively.
+* Reduces overfitting compared to a single decision tree.
+* Performs well on structured tabular data.
+* Works well with weather and time-based features.
+* Requires minimal preprocessing.
+
+---
+
+**XGBoost Regressor**
+
+XGBoost is based on the **Gradient Boosting** technique, where trees are built sequentially. Each new tree learns from the errors of the previous one, gradually improving the model's predictions.
+
+**Why XGBoost?**
+
+* Delivers high prediction accuracy.
+* Captures complex feature relationships.
+* Includes regularization to reduce overfitting.
+* Optimized for speed and efficiency.
+* Widely used for real-world forecasting tasks.
+
+---
+
+**Why Compare Both Models?**
+
+Both models were trained and evaluated to identify the better-performing approach for energy consumption forecasting. Their performance was compared using **MAE, RMSE, and R² Score**.
