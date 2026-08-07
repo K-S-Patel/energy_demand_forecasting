@@ -1,4 +1,4 @@
-#  Energy Consumption Forecasting Using Machine Learning
+# AI-Based Energy Demand Forecasting
 
 > **Hourly Electricity Demand Prediction Using Weather Data, Feature Engineering, Random Forest, and XGBoost**
 
