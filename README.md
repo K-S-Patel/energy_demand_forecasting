@@ -3,38 +3,26 @@
 > **Hourly Electricity Demand Prediction Using Weather Data, Feature Engineering, Random Forest, and XGBoost**
 
 
-#  Project Overview
+# Project Overview
 
-Accurate electricity demand forecasting plays a vital role in modern power systems by helping utility providers balance electricity generation and consumption efficiently. Predicting future energy demand enables better resource planning, reduces operational costs, and improves grid reliability.
-
-This project focuses on forecasting hourly regional electricity consumption using historical electricity demand and weather data. The energy consumption dataset was combined with hourly weather information to create a unified dataset for machine learning.
-
-Several data preprocessing and feature engineering techniques were applied, including data cleaning, dataset merging, lag feature generation, and time-based feature extraction. Two ensemble machine learning algorithms **Random Forest Regressor** and **XGBoost Regressor** were trained and evaluated using multiple performance metrics.
-
-The trained model can be used to predict future hourly electricity consumption for upcoming months using forecasted weather conditions and recursive forecasting.
+This project forecasts hourly electricity consumption using historical energy demand and weather data. After preprocessing and feature engineering, **Random Forest** and **XGBoost** models were trained and compared using **MAE, RMSE, and R² Score**. The best-performing model was then used to generate future electricity demand forecasts through recursive prediction.
 
 
 
-#  Problem Statement
+# Problem Statement
 
-Electricity demand varies continuously throughout the day due to changing weather conditions, seasonal variations, weekdays, weekends, and human activities. Accurate forecasting is essential for electricity providers to efficiently schedule power generation, minimize operational costs, and maintain a stable electricity supply.
-
-This project addresses the problem of predicting future hourly electricity consumption using historical energy demand and weather information.
+Electricity demand changes with weather conditions, seasonal patterns, and human activities. Accurate forecasting helps utilities optimize power generation, reduce operational costs, and improve grid reliability. This project predicts hourly electricity consumption using historical demand and weather data.
 
 
-#  Objectives
+# Objectives
 
-The primary objectives of this project are:
+* Preprocess and merge energy and weather datasets.
+* Perform feature engineering using lag and time-based features.
+* Train **Random Forest** and **XGBoost** regression models.
+* Evaluate model performance using **MAE, RMSE, and R² Score**.
+* Compare both models and select the best-performing model.
+* Forecast future hourly electricity consumption.
 
-- Collect and preprocess historical energy consumption and weather datasets.
-- Merge both datasets using hourly timestamps.
-- Perform data cleaning and feature engineering.
-- Generate lag features and time-based features for improved forecasting.
-- Train a Random Forest Regressor model.
-- Train an XGBoost Regressor model.
-- Compare model performance using MAE, RMSE, and R² Score.
-- Visualize actual and predicted energy consumption of both model.
-- Forecast future hourly electricity demand using the trained machine learning model.
 
 
 #  Technologies Used
@@ -49,37 +37,42 @@ The primary objectives of this project are:
 | **XGBoost** | Gradient boosting regression model |
 | **Jupyter Notebook** | Model development and experimentation |
 
+# Installation guide and Requirement
+
+```bash
+git clone https://github.com/your-username/Energy-Consumption-Forecasting.git
+
+cd Energy-Consumption-Forecasting
+
+pip install -r requirements.txt
+
+jupyter notebook
 
 
-#  Dataset
+# Dataset
 
-This project uses two separate datasets that are merged using their common hourly timestamp.
+The project uses two datasets merged on hourly timestamps to create the final training dataset.
 
 ## 1. Energy Consumption Dataset
 
-This dataset contains historical hourly electricity consumption values for the California (US) region. The target variable represents total electricity demand measured in megawatts (MW).
-
-**Key Information**
-
-- Hourly energy consumption records
-- Target variable: **California Consumption (MW)**
-- Time period: **January 2019 – April 2026**
-
+* **Region:** California (US)
+* **Time Period:** January 2019 – April 2026
+* **Target Variable:** California Consumption (MW)
+* **Frequency:** Hourly
 
 ## 2. Weather Dataset
 
-The weather dataset contains hourly meteorological information corresponding to the same timestamps as the energy dataset.
+The weather dataset provides hourly environmental data corresponding to the energy consumption records.
 
-The following weather features were used:
+**Features Used**
 
-- Temperature
-- Relative Humidity
-
-These weather variables help the model learn how environmental conditions influence electricity demand.
+* Temperature
+* Relative Humidity
 
 ## Final Dataset
 
-After preprocessing and merging, the final dataset contains both energy consumption and weather information along with engineered features used for machine learning.
+The merged dataset combines energy consumption, weather data, and engineered features for model training and forecasting.
+
 
 ### Features Used for Training
 
@@ -109,7 +102,7 @@ After preprocessing and merging, the final dataset contains both energy consumpt
  
 
 ---
-# Step 2 : Load Energy Dataset
+### Step 2 : Load Energy Dataset
 Created a list containing the file paths of all yearly and monthly energy consumption Excel (.xlsx) files. This list was used to automate the data loading process instead of reading each file individually
 
 
@@ -194,3 +187,95 @@ XGBoost is based on the **Gradient Boosting** technique, where trees are built s
 **Train Test Split**
 - Split the dataset into 80% training and 20% testing sets using train_test_split().
 - Set shuffle=False to preserve the chronological order of the time-series data and random_state=42 for reproducibility.
+
+---
+
+### Step 9 : Training the model
+- Trained Random Forest Regressor and XGBoost Regressor using the training dataset.
+- Configured each model with appropriate hyperparameters for energy consumption forecasting.
+
+---
+
+### Step 10 : Generate prediction
+- Used the trained models to predict energy consumption on the testing dataset.
+- Stored the predictions for later performance evaluation and model comparison.
+
+---
+
+### Step 11 Model Evaluation
+Calculated **MAE** (Mean Absolute Error), **RMSE** (Root Mean Squared Error), and **R² Score** to measure prediction accuracy and compare the performance of both models.
+
+---
+
+### Step 12 Model Performance Comparison
+-Created a comparison table containing MAE, RMSE, and R² Score for both Random Forest and XGBoost models.
+-**XGBoost** achieved the best overall performance, with slightly better MAE and R² Score, and a significantly lower RMSE than the Random Forest model.
+
+---
+
+
+### Step 13 Prediction Comparison on Individual Values
+
+-Created a comparison table showing the actual values, Random Forest predictions, and XGBoost predictions.
+-Calculated the prediction error and absolute error for both models to compare their prediction accuracy on individual test samples.
+
+---
+
+### Step 14  Visulaiztion of Energy Consumption (2019 to April 2026)
+ **Daily trend**
+
+
+ **Weekly Average trend**
+
+
+ **Monthly Average trend**
+
+
+ ---
+
+
+ ### Step 15 Actual vs Predicted Consumption
+ -Plotted the actual energy consumption alongside the predictions from Random Forest and XGBoost on the testing dataset.
+ -Used the graph to identify which model more closely followed the real energy consumption pattern.
+
+ ---
+
+
+## FUTURE ENERGY FORECASTING
+
+***Note: Historical energy consumption data was available only until April 2026. Therefore, future forecasting was performed for the period May–August 2026 using the available weather data and the trained model.**
+
+---
+
+
+### Step 16 Prepare Future Input Data
+- Loaded the future weather dataset (new_weather_info.xlsx) containing weather information for the forecasting period (May–August 2026).
+- Inspected the dataset to verify its structure and data types.
+- Generated time-based features (Hour, DayOfWeek, Month, and IsWeekend) from the Date column to prepare the input data for future energy consumption prediction.
+
+---
+
+### Step 17 Future Energy Consumption Prediction
+-Generated lag features using historical and previously predicted values.
+-Predicted future energy consumption using the trained XGBoost model.
+-Stored the predicted values in the dataset for the complete forecasting period (May–August 2026).
+
+### Step 18 Visualize Future Forecast
+- Visualized the predicted energy consumption for the May–August 2026 forecasting period.
+- The forecast follows a realistic trend during the initial period (May–June). However, a noticeable drop appears from early July as the model increasingly relies on previously predicted values for lag features instead of historical observations, causing prediction errors to accumulate over time
+
+---
+---
+
+# 📈 Results & Key FindingsModel Performance: 
+XGBoost outperformed the Random Forest Regressor across metrics, demonstrating superior $R^2$ accuracy and a lower RMSE value when learning complex non-linear relationships.Trend Alignment: Visual evaluation confirmed that predictions closely matched real daily peaks, weekly cycles, and monthly seasonality shifts.Future Demand Forecasting: Successfully generated hourly future electricity demand projections for May–August 2026.
+## 💡 Observation on Future Forecasts: While short-term recursive forecasts (May–June 2026) yielded accurate baseline trends, long-range predictions (July–August 2026) showed error compounding due to relying heavily on previously predicted lag values rather than ground-truth historical inputs.
+
+
+# 🚀 Future Improvements
+- Evaluate deep learning models such as **LSTM** and **Transformer** for long-term forecasting.
+- Develop a web-based dashboard for real-time energy demand prediction and visualization.
+
+# Conclusion
+
+This project demonstrates that machine learning can effectively forecast hourly electricity consumption using historical demand, weather conditions, and engineered time-series features. Among the evaluated models, **XGBoost** delivered the best overall performance and was selected as the final forecasting model. The proposed approach provides reliable short-term forecasts that can support energy planning and decision-making.
