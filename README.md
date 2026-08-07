@@ -90,180 +90,273 @@ The merged dataset combines energy consumption, weather data, and engineered fea
 | IsWeekend | Indicates whether the day is a weekend |
 | California_consumption_MW | Target variable (electricity demand) |
 
-## Project Workflow
- ### Step 1 Import Required Libraries
- | **Library** | **Why it is Used** |
-|--------------|--------------------|
-| **Pandas** | Used for loading, cleaning, merging, and manipulating the dataset in tabular format. |
-| **NumPy** | Used for efficient numerical computations and array operations during data preprocessing. |
-| **Scikit-learn (Random Forest Regressor)** | Used to build the Random Forest machine learning model for predicting hourly energy consumption. |
-| **XGBoost** | Used to train an advanced gradient boosting model and compare its performance with the Random Forest model. |
-| **Scikit-learn Metrics (MAE, MSE, R² Score)** | Used to evaluate the prediction accuracy and overall performance of the trained models. |
- 
- 
+# Project Workflow
 
----
-### Step 2 : Load Energy Dataset
-Created a list containing the file paths of all yearly and monthly energy consumption Excel (.xlsx) files. This list was used to automate the data loading process instead of reading each file individually
+The overall workflow of the project is illustrated below.
 
+```mermaid
+flowchart TD
 
+A[Load Energy Dataset]
+B[Load Weather Dataset]
 
- ---
- ### Step 3 : Merging Data
-Iterated through the list of Excel files using a for loop, loaded each dataset, and combined them into a single DataFrame. The final merged dataset was then exported and saved as **Energy_Consumption_2019_April2026.xlsx** for further preprocessing and model development.
+A --> C[Merge Datasets]
+B --> C
 
----
+C --> D[Data Cleaning]
 
-### Step 4 : Inspect and Prepare Datasets
-Inspected the merged energy consumption dataset using **df.head()** and **df.info()** to verify its structure, data types, and overall data quality. Loaded the weather dataset into a separate DataFrame (weather_df) and performed the same inspection to ensure it was ready for integration. Since the energy dataset stored the date and hour in separate columns (Date and HR), the Date column was updated by adding the corresponding hour values using **merged_df["Date"] = merged_df["Date"] + pd.to_timedelta(merged_df["HR"] - 1, unit="h")**. This created a complete datetime format, making it compatible for merging with the weather datas
+D --> E[Feature Engineering]
 
+E --> F[Train-Test Split]
 
----
-### Step 5:Merge Energy and Weather Datasets
-Merged the energy consumption dataset (merged_df) with the weather dataset (weather_df) using the common datetime columns (Date from the energy dataset and Time from the weather dataset). An inner join (how='inner') was applied to retain only the records with matching timestamps in both datasets, resulting in a unified dataset containing both energy consumption and corresponding weather information and stored in **final_df** dataframe.
+F --> G[Random Forest]
 
----
+F --> H[XGBoost]
 
-### Step 6 : Select Relevant Features and Save the Final Dataset - DATA CLEANING
-- Removed all unnecessary columns, keeping only **Date**, **SCE**, **Temperature**, and **Relative Humidity**.
-- Renamed SCE to **California_Consumption_MW** for better readability.
-- Saved the cleaned dataset as final_data.xlsx for further analysis and model training.
+G --> I[Model Evaluation]
+H --> I
 
+I --> J[Model Comparison]
+
+J --> K[Future Forecasting]
+```
 
 ---
 
-### Step 7 Feature Engineering
-- Created historical lag features **(Lag_1H, Lag_1D, and Lag_1W)** to capture previous energy consumption patterns.
-- Removed rows containing null values generated after creating lag features.
-- Extracted time-based features **(Hour, DayOfWeek, Month, and IsWeekend)** from the Date column to help the model learn temporal patterns in  electricity consumption.
+<details>
+<summary><b>Step 1: Import Required Libraries</b></summary>
+
+| Library | Purpose |
+|----------|---------|
+| **Pandas** | Data loading and preprocessing |
+| **NumPy** | Numerical computations |
+| **Scikit-learn** | Random Forest, train-test split, evaluation metrics |
+| **XGBoost** | Gradient boosting regression model |
+| **Matplotlib** | Data visualization |
+
+</details>
 
 ---
 
- ## Model Selection
-Based on the dataset structure two model **Random Forest Regresser** and **XGBoost** are selected.
-**REASON**
-Since electricity consumption depends on complex relationships between weather conditions, historical demand, and time-based patterns, ensemble learning models were chosen for their ability to capture nonlinear relationships and improve prediction accuracy.
-**Why Ensemble Learning?**
+<details>
+<summary><b>Step 2: Load Energy Dataset</b></summary>
 
-Ensemble learning combines the predictions of multiple decision trees to produce a more accurate and stable model than a single decision tree. It helps reduce overfitting and improves overall prediction performance.
+- Loaded yearly and monthly California electricity demand datasets.
+- Combined all Excel files into a single DataFrame.
 
-This project uses two ensemble learning algorithms:
-
-* Random Forest Regressor
-* XGBoost Regressor
-
-
-**Random Forest Regressor**
-
-Random Forest is based on the **Bagging (Bootstrap Aggregating)** technique, where multiple decision trees are trained on different subsets of the training data. The final prediction is obtained by averaging the predictions of all trees.
-
-**Why Random Forest?**
-
-* Handles nonlinear relationships effectively.
-* Reduces overfitting compared to a single decision tree.
-* Performs well on structured tabular data.
-* Works well with weather and time-based features.
-* Requires minimal preprocessing.
+</details>
 
 ---
 
-**XGBoost Regressor**
+<details>
+<summary><b>Step 3: Merge Energy Data</b></summary>
 
-XGBoost is based on the **Gradient Boosting** technique, where trees are built sequentially. Each new tree learns from the errors of the previous one, gradually improving the model's predictions.
+- Merged all yearly energy datasets into one dataset.
+- Exported the merged dataset as **Energy_Consumption_2019_April2026.xlsx**.
 
-**Why XGBoost?**
-
-* Delivers high prediction accuracy.
-* Captures complex feature relationships.
-* Includes regularization to reduce overfitting.
-* Optimized for speed and efficiency.
-* Widely used for real-world forecasting tasks.
+</details>
 
 ---
 
-### Step 8 : Input Featur, Target Selection and Train Test Split
-- **Input Feature** Selected all input features by excluding Date and the target column (California_Consumption_MW).
-- **Target Selection** Assigned California_Consumption_MW as the target variable for prediction.
+<details>
+<summary><b>Step 4: Inspect & Prepare Datasets</b></summary>
 
-**Train Test Split**
-- Split the dataset into 80% training and 20% testing sets using train_test_split().
-- Set shuffle=False to preserve the chronological order of the time-series data and random_state=42 for reproducibility.
+- Verified dataset structure using `head()` and `info()`.
+- Converted **Date** and **HR** into a complete hourly timestamp.
+- Loaded and verified the weather dataset.
 
----
-
-### Step 9 : Training the model
-- Trained Random Forest Regressor and XGBoost Regressor using the training dataset.
-- Configured each model with appropriate hyperparameters for energy consumption forecasting.
+</details>
 
 ---
 
-### Step 10 : Generate prediction
-- Used the trained models to predict energy consumption on the testing dataset.
-- Stored the predictions for later performance evaluation and model comparison.
+<details>
+<summary><b>Step 5: Merge Energy & Weather Datasets</b></summary>
+
+- Merged both datasets using the common datetime column.
+- Applied an **inner join** to retain matching hourly records.
+- Stored the merged dataset in **final_df**.
+
+</details>
 
 ---
 
-### Step 11 Model Evaluation
-Calculated **MAE** (Mean Absolute Error), **RMSE** (Root Mean Squared Error), and **R² Score** to measure prediction accuracy and compare the performance of both models.
+<details>
+<summary><b>Step 6: Data Cleaning</b></summary>
+
+- Removed unnecessary columns.
+- Renamed **SCE** to **California_Consumption_MW**.
+- Saved the cleaned dataset for model development.
+
+</details>
 
 ---
 
-### Step 12 Model Performance Comparison
--Created a comparison table containing MAE, RMSE, and R² Score for both Random Forest and XGBoost models.
--**XGBoost** achieved the best overall performance, with slightly better MAE and R² Score, and a significantly lower RMSE than the Random Forest model.
+<details>
+<summary><b>Step 7: Feature Engineering</b></summary>
+
+- Created lag features (**Lag_1H, Lag_1D, Lag_1W**).
+- Extracted **Hour, DayOfWeek, Month,** and **IsWeekend** features.
+- Removed rows containing null values generated by lag features.
+
+</details>
 
 ---
 
+<details>
 
-### Step 13 Prediction Comparison on Individual Values
 
--Created a comparison table showing the actual values, Random Forest predictions, and XGBoost predictions.
--Calculated the prediction error and absolute error for both models to compare their prediction accuracy on individual test samples.
+## Model Selection
+
+Two ensemble learning models were selected to forecast hourly electricity consumption.
+
+### Random Forest Regressor
+
+- Uses the **Bagging** technique.
+- Handles nonlinear relationships effectively.
+- Reduces overfitting and performs well on structured datasets.
+
+### XGBoost Regressor
+
+- Uses the **Gradient Boosting** technique.
+- Provides higher prediction accuracy through sequential learning.
+- Includes regularization to improve generalization and reduce overfitting.
+
+</details>
+---
+
+<details>
+<summary><b>Step 8: Train-Test Split</b></summary>
+
+- Selected all engineered features as input variables.
+- Used **California_Consumption_MW** as the target variable.
+- Split the dataset into **80% training** and **20% testing** data.
+- Set `shuffle=False` to preserve chronological order.
+
+</details>
 
 ---
 
-### Step 14  Visulaiztion of Energy Consumption (2019 to April 2026)
- **Daily trend**
+<details>
+<summary><b>Step 9: Model Training</b></summary>
 
+- Trained both **Random Forest** and **XGBoost** models.
+- Configured suitable hyperparameters for energy demand forecasting.
+- Saved the trained models for evaluation.
 
- **Weekly Average trend**
+</details>
 
+---
+<details>
+<summary><b>Step 10: Generate Predictions</b></summary>
 
- **Monthly Average trend**
+- Generated predictions on the testing dataset using both models.
+- Stored predictions for performance evaluation and comparison.
 
-
- ---
-
-
- ### Step 15 Actual vs Predicted Consumption
- -Plotted the actual energy consumption alongside the predictions from Random Forest and XGBoost on the testing dataset.
- -Used the graph to identify which model more closely followed the real energy consumption pattern.
-
- ---
-
-
-## FUTURE ENERGY FORECASTING
-
-***Note: Historical energy consumption data was available only until April 2026. Therefore, future forecasting was performed for the period May–August 2026 using the available weather data and the trained model.**
+</details>
 
 ---
 
+<details>
+<summary><b>Step 11: Model Evaluation</b></summary>
 
-### Step 16 Prepare Future Input Data
-- Loaded the future weather dataset (new_weather_info.xlsx) containing weather information for the forecasting period (May–August 2026).
-- Inspected the dataset to verify its structure and data types.
-- Generated time-based features (Hour, DayOfWeek, Month, and IsWeekend) from the Date column to prepare the input data for future energy consumption prediction.
+The trained models were evaluated using:
+
+- **MAE (Mean Absolute Error)**
+- **RMSE (Root Mean Squared Error)**
+- **R² Score**
+
+These metrics were used to compare the prediction accuracy of both models.
+
+</details>
 
 ---
 
-### Step 17 Future Energy Consumption Prediction
--Generated lag features using historical and previously predicted values.
--Predicted future energy consumption using the trained XGBoost model.
--Stored the predicted values in the dataset for the complete forecasting period (May–August 2026).
+<details>
+<summary><b>Step 12: Model Performance Comparison</b></summary>
 
-### Step 18 Visualize Future Forecast
-- Visualized the predicted energy consumption for the May–August 2026 forecasting period.
-- The forecast follows a realistic trend during the initial period (May–June). However, a noticeable drop appears from early July as the model increasingly relies on previously predicted values for lag features instead of historical observations, causing prediction errors to accumulate over time
+- Compared Random Forest and XGBoost using **MAE, RMSE, and R² Score**.
+- **XGBoost** achieved the best overall performance and was selected as the final forecasting model.
+
+</details>
+
+---
+
+<details>
+<summary><b>Step 13: Prediction Comparison</b></summary>
+
+- Compared actual energy consumption with predictions from both models.
+- Calculated prediction error and absolute error for each model.
+
+</details>
+
+---
+
+<details>
+<summary><b>Step 14: Data Visualization</b></summary>
+
+Visualized historical electricity consumption using:
+
+- Daily Trend
+- Weekly Average Trend
+- Monthly Average Trend
+
+</details>
+
+---
+
+<details>
+<summary><b>Step 15: Actual vs Predicted Results</b></summary>
+
+- Plotted actual and predicted electricity consumption.
+- Compared prediction trends of Random Forest and XGBoost.
+- Verified how closely each model followed the real consumption pattern.
+
+</details>
+
+---
+
+# Future Energy Forecasting
+
+> **Note:** Historical energy consumption data was available only until **April 2026**. Future forecasting was performed for **May–August 2026** using forecasted weather data and the trained model.
+
+---
+
+<details>
+<summary><b>Step 16: Prepare Future Input Data</b></summary>
+
+- Loaded the future weather dataset.
+- Generated **Hour, DayOfWeek, Month,** and **IsWeekend** features.
+- Prepared the dataset for future energy demand prediction.
+
+</details>
+
+---
+
+<details>
+<summary><b>Step 17: Future Energy Prediction</b></summary>
+
+- Generated recursive lag features using historical and predicted values.
+- Predicted hourly electricity demand using the trained **XGBoost** model.
+- Stored the predicted values for the complete forecasting period.
+
+</details>
+
+---
+
+<details>
+<summary><b>Step 18: Future Forecast Visualization</b></summary>
+
+- Visualized predicted electricity demand from **May–August 2026**.
+- Short-term forecasts closely followed expected demand patterns.
+- Prediction accuracy gradually decreased over longer periods due to recursive forecasting.
+
+</details>
+
+---
+
+## Forecast Observation
+
+Recursive forecasting produced reliable predictions during the initial forecast period. However, as the model relied on previously predicted values to generate new lag features, forecasting errors gradually accumulated, resulting in reduced accuracy for long-term predictions.
 
 ---
 ---
