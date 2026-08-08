@@ -408,7 +408,7 @@ Recursive forecasting produced reliable predictions during the initial forecast 
 ---
 
 # 📈 Results & Key FindingsModel Performance: 
-XGBoost outperformed the Random Forest Regressor across metrics, demonstrating superior $R^2$ accuracy and a lower RMSE value when learning complex non-linear relationships.Trend Alignment: Visual evaluation confirmed that predictions closely matched real daily peaks, weekly cycles, and monthly seasonality shifts.Future Demand Forecasting: Successfully generated hourly future electricity demand projections for May–August 2026.
+XGBoost outperformed the Random Forest Regressor across metrics, demonstrating superior $R^2$ accuracy and a lower RMSE value when learning complex non-linear relationships.Trend Alignment: Visual evaluation confirmed that predictions closely matched real daily peaks, weekly cycles, and monthly seasonality shifts.Future Demand Forecasting: Successfully generated hourly future electricity demand projections for next 15 days.
 
 
 # 🚀 Future Improvements
