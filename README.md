@@ -36,6 +36,7 @@ Electricity demand changes with weather conditions, seasonal patterns, and human
 | **Scikit-learn** | Random Forest model, preprocessing, train-test split, evaluation metrics |
 | **XGBoost** | Gradient boosting regression model |
 | **Jupyter Notebook** | Model development and experimentation |
+| **Streamlit** | Used for Intractive Dashboard |
 
 # Installation guide and Requirement
 
@@ -358,8 +359,7 @@ Visualized historical electricity consumption using:
 
 # Future Energy Forecasting
 
-> **Note:** Historical energy consumption data was available only until **April 2026**. Future forecasting was performed for **May–August 2026** using forecasted weather data and the trained model.
-
+> **Note:** Historical energy consumption data was available only until **April 2026**. Predicted Data from May to 5 August 2026 is added.Future Prediction is then made for next 15 days
 ---
 
 <details>
@@ -391,7 +391,8 @@ Visualized historical electricity consumption using:
 - Short-term forecasts closely followed expected demand patterns.
 - Prediction accuracy gradually decreased over longer periods due to recursive forecasting.
 
-  <img width="1333" height="701" alt="pred" src="https://github.com/user-attachments/assets/d19bd820-a851-467d-8d25-5e950c7815fe" />
+ <img width="1672" height="532" alt="Screenshot 2026-08-08 234752" src="https://github.com/user-attachments/assets/caad5105-25e3-4b84-b482-ca688d6fc4a9" />
+
 
 
 
@@ -412,7 +413,8 @@ XGBoost outperformed the Random Forest Regressor across metrics, demonstrating s
 
 # 🚀 Future Improvements
 - Evaluate deep learning models such as **LSTM** and **Transformer** for long-term forecasting.
-- Develop a web-based dashboard for real-time energy demand prediction and visualization.
+-Integrate additional real-time factors such as weather forecasts, holidays, and special events to improve prediction accuracy.
+-Implement automated model retraining and monitoring to adapt the forecasting model to changing energy consumption patterns.
 
 # Conclusion
 
