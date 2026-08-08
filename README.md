@@ -413,8 +413,8 @@ XGBoost outperformed the Random Forest Regressor across metrics, demonstrating s
 
 # 🚀 Future Improvements
 - Evaluate deep learning models such as **LSTM** and **Transformer** for long-term forecasting.
--Integrate additional real-time factors such as weather forecasts, holidays, and special events to improve prediction accuracy.
--Implement automated model retraining and monitoring to adapt the forecasting model to changing energy consumption patterns.
+- Integrate additional real-time factors such as weather forecasts, holidays, and special events to improve prediction accuracy.
+- Implement automated model retraining and monitoring to adapt the forecasting model to changing energy consumption patterns.
 
 # Conclusion
 
