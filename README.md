@@ -391,7 +391,8 @@ Visualized historical electricity consumption using:
 - Short-term forecasts closely followed expected demand patterns.
 - Prediction accuracy gradually decreased over longer periods due to recursive forecasting.
 
-  <img width="1333" height="701" alt="predicted" src="https://github.com/user-attachments/assets/e7b84319-7daf-4c9c-ab03-8e0e81880323" />
+  <img width="1333" height="701" alt="pred" src="https://github.com/user-attachments/assets/d19bd820-a851-467d-8d25-5e950c7815fe" />
+
 
 
 </details>
@@ -402,12 +403,11 @@ Visualized historical electricity consumption using:
 
 Recursive forecasting produced reliable predictions during the initial forecast period. However, as the model relied on previously predicted values to generate new lag features, forecasting errors gradually accumulated, resulting in reduced accuracy for long-term predictions.
 
----
+
 ---
 
 # 📈 Results & Key FindingsModel Performance: 
 XGBoost outperformed the Random Forest Regressor across metrics, demonstrating superior $R^2$ accuracy and a lower RMSE value when learning complex non-linear relationships.Trend Alignment: Visual evaluation confirmed that predictions closely matched real daily peaks, weekly cycles, and monthly seasonality shifts.Future Demand Forecasting: Successfully generated hourly future electricity demand projections for May–August 2026.
-## 💡 Observation on Future Forecasts: While short-term recursive forecasts (May–June 2026) yielded accurate baseline trends, long-range predictions (July–August 2026) showed error compounding due to relying heavily on previously predicted lag values rather than ground-truth historical inputs.
 
 
 # 🚀 Future Improvements
