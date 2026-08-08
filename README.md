@@ -153,6 +153,8 @@ J --> K[Future Forecasting]
 
 - Merged all yearly energy datasets into one dataset.
 - Exported the merged dataset as **Energy_Consumption_2019_April2026.xlsx**.
+  <img width="638" height="202" alt="Screenshot 2026-08-08 144106" src="https://github.com/user-attachments/assets/a70b8bc5-62e5-4ecb-a74a-e96f1801a65d" />
+
 
 </details>
 
@@ -175,6 +177,9 @@ J --> K[Future Forecasting]
 - Merged both datasets using the common datetime column.
 - Applied an **inner join** to retain matching hourly records.
 - Stored the merged dataset in **final_df**.
+  
+  <img width="623" height="288" alt="Screenshot 2026-08-08 144126" src="https://github.com/user-attachments/assets/9dbb83f9-b838-49ec-840e-1f3e1abbfabf" />
+
 
 </details>
 
@@ -186,6 +191,9 @@ J --> K[Future Forecasting]
 - Removed unnecessary columns.
 - Renamed **SCE** to **California_Consumption_MW**.
 - Saved the cleaned dataset for model development.
+  
+  <img width="645" height="200" alt="Screenshot 2026-08-08 144216" src="https://github.com/user-attachments/assets/59e54d0b-9b49-48b6-b47a-06eaf5824ca4" />
+
 
 </details>
 
@@ -225,6 +233,7 @@ Two ensemble learning models were selected to forecast hourly electricity consum
 - Includes regularization to improve generalization and reduce overfitting.
 
 </details>
+
 ---
 
 <details>
@@ -234,6 +243,9 @@ Two ensemble learning models were selected to forecast hourly electricity consum
 - Used **California_Consumption_MW** as the target variable.
 - Split the dataset into **80% training** and **20% testing** data.
 - Set `shuffle=False` to preserve chronological order.
+
+  <img width="937" height="166" alt="Screenshot 2026-08-08 144256" src="https://github.com/user-attachments/assets/e70d99cb-eda2-4df0-b104-34792af99f81" />
+
 
 </details>
 
@@ -245,6 +257,10 @@ Two ensemble learning models were selected to forecast hourly electricity consum
 - Trained both **Random Forest** and **XGBoost** models.
 - Configured suitable hyperparameters for energy demand forecasting.
 - Saved the trained models for evaluation.
+
+  <img width="605" height="93" alt="Screenshot 2026-08-08 144314" src="https://github.com/user-attachments/assets/eca1587c-99b5-4660-b7ef-9e569585f246" />
+<img width="804" height="107" alt="Screenshot 2026-08-08 144323" src="https://github.com/user-attachments/assets/911b8843-e9ee-4196-81d6-cf88c22cfbb3" />
+
 
 </details>
 
@@ -269,6 +285,9 @@ The trained models were evaluated using:
 - **R² Score**
 
 These metrics were used to compare the prediction accuracy of both models.
+
+<img width="522" height="206" alt="Screenshot 2026-08-08 144400" src="https://github.com/user-attachments/assets/b305c314-b1b2-46f2-bcdc-5a25d4cdedcb" />
+
 
 </details>
 
