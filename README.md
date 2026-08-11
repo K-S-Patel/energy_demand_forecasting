@@ -43,11 +43,14 @@ Electricity demand changes with weather conditions, seasonal patterns, and human
 ```bash
 git clone https://github.com/K-S-Patel/energy_demand_forecasting.git
 
-cd Energy-Consumption-Forecasting
-
+cd energy-consumption-forecasting
 pip install -r requirements.txt
 
 jupyter notebook
+#Run in local host
+streamlit run app.py
+
+]
 ```
 
 
