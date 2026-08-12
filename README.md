@@ -33,6 +33,7 @@ Electricity demand changes with weather conditions, seasonal patterns, and human
 | **Pandas** | Data loading, preprocessing, and manipulation |
 | **NumPy** | Numerical computations |
 | **Matplotlib** | Data visualization |
+| **Seaborne** | Visulaiztion |
 | **Scikit-learn** | Random Forest model, preprocessing, train-test split, evaluation metrics |
 | **XGBoost** | Gradient boosting regression model |
 | **Jupyter Notebook** | Model development and experimentation |
@@ -136,7 +137,8 @@ J --> K[Future Forecasting]
 | **NumPy** | Numerical computations |
 | **Scikit-learn** | Random Forest, train-test split, evaluation metrics |
 | **XGBoost** | Gradient boosting regression model |
-| **Matplotlib** | Data visualization |
+| **Matplotlib/Seaborne** | Data visualization |
+
 
 </details>
 
@@ -328,18 +330,18 @@ These metrics were used to compare the prediction accuracy of both models.
 
 Visualized historical electricity consumption using:
 
-- Daily Trend
-<img width="1590" height="590" alt="dailyTrend" src="https://github.com/user-attachments/assets/8478dc0e-92f9-44f9-b93d-0fdc31598f94" />
+- Energy Consumption vs Temperature
+    <img width="1090" height="560" alt="Screenshot 2026-08-12 173622" src="https://github.com/user-attachments/assets/33a70fb4-3dac-4dac-a8d9-ad90476beada" />
 
   
-- Weekly Average Trend
+- WeekDay vs Weekend Consumption
 
-<img width="1333" height="547" alt="Weeklytrend" src="https://github.com/user-attachments/assets/03548620-3062-4179-b263-7d679835d92f" />
+<img width="1181" height="576" alt="Screenshot 2026-08-12 173637" src="https://github.com/user-attachments/assets/b4c418af-caf3-4d15-bbfb-08f9eecb8a48" />
 
   
-- Monthly Average Trend
+- Weekly Avg Consumption / Temperature Graph
 
-  <img width="1333" height="547" alt="Monthlyavg" src="https://github.com/user-attachments/assets/67ebd751-4217-454f-96b2-b1ab891d67c4" />
+  <img width="1347" height="494" alt="Screenshot 2026-08-12 173653" src="https://github.com/user-attachments/assets/1fa14dc0-d3df-4327-9bfa-a5aa3f8ffbe1" />
 
 
 </details>
